@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApp.Data;
 using WebApp.JwtService;
 using WebApp.Models;
+using WebApp.Services.Interfaces;
 
 namespace WebApp.Controllers
 {
@@ -12,12 +13,15 @@ namespace WebApp.Controllers
     {
         private readonly WebAppContext _context;
         private readonly ITokenService _tokenService;
+        private readonly IUserService _userService;
         public AuthController(
             WebAppContext context,
-            ITokenService tokenService)
+            ITokenService tokenService,
+            IUserService userService)
         {
             _context = context;
             _tokenService = tokenService;
+            _userService = userService;
         }
 
         [HttpPost("login")]
@@ -32,5 +36,16 @@ namespace WebApp.Controllers
             var token = _tokenService.GenerateToken(user);
             return Ok(new { Token = token });
         }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] User user)
+        {
+            //Call service user
+            var rs = await _userService.RegisterUser(user);
+            if (!rs) return BadRequest("something went wrong!");
+            var token = _tokenService.GenerateToken(user);
+            return Ok(new { Token = token });
+        }
+
     }
 }

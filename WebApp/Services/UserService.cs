@@ -12,19 +12,19 @@ namespace WebApp.Services
             _context = context;
         }
 
-        public async Task<int> RegisterUser (User user)
+        public async Task<bool> RegisterUser (User user)
         {
             try
             {
                 if (_context.Users.Any(u => u.Username == user.Username))
                 {
-                    return 2;
+                    return false;
                 }
 
                 _context.Users.Add(user);
                 var result = await _context.SaveChangesAsync();
 
-                return result;
+                return true;
             }
             catch (Exception ex)
             {
