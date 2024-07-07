@@ -1,4 +1,5 @@
-﻿using WebApp.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using WebApp.Data;
 using WebApp.Models;
 using WebApp.Services.Interfaces;
 
@@ -6,8 +7,8 @@ namespace WebApp.Services
 {
     public class UserService : IUserService
     {
-        private readonly WebAppContext _context;
-        public UserService(WebAppContext context)
+        private readonly DbContextOptions<WebAppContext> _context;
+        public UserService(DbContextOptions<WebAppContext> context)
         {
             _context = context;
         }
@@ -16,15 +17,19 @@ namespace WebApp.Services
         {
             try
             {
-                if (_context.Users.Any(u => u.Username == user.Username))
+                using (var context = new WebAppContext(_context))
                 {
-                    return false;
+                    //if (context.Users.Any(u => u.Username == user.Username))
+                    //{
+                    //    return false;
+                    //}
+
+                    //context.Users.Add(user);
+                    //var result = await context.SaveChangesAsync();
+
+                    return true;
                 }
-
-                _context.Users.Add(user);
-                var result = await _context.SaveChangesAsync();
-
-                return true;
+                
             }
             catch (Exception ex)
             {
