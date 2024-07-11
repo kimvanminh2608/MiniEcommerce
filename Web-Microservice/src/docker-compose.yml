@@ -2,11 +2,11 @@ version: '3.8'
 
 services:
   # Database section
-  sqlserverdb:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+  # sqlserverdb:
+  #   image: mcr.microsoft.com/mssql/server:2019-latest
     
-  mysqldb:
-    image: mysql:8.0.29
+  # mysqldb:
+  #   image: mysql:8.0.29
     
   orderingdb:
     image: mcr.microsoft.com/mssql/server:2019-latest

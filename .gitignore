@@ -1,1 +1,9 @@
 ﻿Web-Microservice/.vs
+Web-Microservice/src/ApiGateways/OcelotApiGw/bin
+Web-Microservice/src/ApiGateways/OcelotApiGw/obj
+Web-Microservice/src/BuildingBlocks/Common.Logging/bin
+Web-Microservice/src/BuildingBlocks/Common.Logging/obj
+bin
+obj
+bin
+obj
