@@ -1,5 +1,6 @@
 using Common.Logging;
 using Product.API.Extensions;
+using Product.API.Persistence;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,16 +13,27 @@ try
 
     builder.Host.AddAppConfiguration();
 
-    builder.Services.AddInfrastructure();
+    builder.Services.AddInfrastructure(builder.Configuration);
 
     var app = builder.Build();
 
     app.UseInfrastructure();
 
-    app.Run();
+    // auto migrate database when run api
+    app.MigrateDatabase<ProductContext>((context, _) =>
+        {
+            ProductContextSeed.SeedProductAsync(context, Log.Logger).Wait();
+        })
+        .Run();
+    
 }
 catch (Exception ex)
 {
+    string type = ex.GetType().Name;
+    if (type.Equals("StopTheHostException",StringComparison.Ordinal))
+    {
+        throw;
+    }
     Log.Fatal(ex, "Unhandled exception");
 }
 finally
