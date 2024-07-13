@@ -21,7 +21,8 @@ Go to the folder contain file `docker-compose`
 docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remove-orphans
 ```
 
-## Local Environment (Docker container):
+## Application URLs - Local Environment (Docker container):
+- Product API: http://locahost:6002
 
 ## Docker application urls
 - Portainer: http://localhost:9000 - username: admin ; pass: admin123456789
@@ -34,7 +35,7 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remo
 ---
 
 ## Developement environment
-
+- Product API: http://locahost:5002/api/products
 ## Production environment
 
 ---
