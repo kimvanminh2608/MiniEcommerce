@@ -141,11 +141,11 @@ services:
   product.api:
     container_name: product.api
     environment:
-     - ASPNETCORE_ENVIRONMENT=development
+     - ASPNETCORE_ENVIRONMENT=Development
      - ASPNETCORE_URLS=http://+:80
-     - "ConnectionStrings:DefaultConnectionString=Server=productdb;Port=3306;Database=ProductDb;Uid=root;Pwd=KvM1996$"
+     - "ConnectionStrings:DefaultConnectionString=Server=productdb;Port=3306;Database=ProductDb;Uid=root;Pwd=KvM1996$;"
     depends_on:
-     - productDb
+     - productdb
     ports:
      - "6002:80"
     restart: always
