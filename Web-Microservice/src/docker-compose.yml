@@ -46,6 +46,12 @@ services:
       context: .
       dockerfile: Services/Product.API/Dockerfile
 
+  customer.api:
+    image: ${DOCKER_REGISTRY-}customer-api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Customer.API/Dockerfile
+
 networks:
   default:
     name: web_microservices
