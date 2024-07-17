@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace Contracts.Commons.Interfaces
 {
-    public interface IRepositoryQueryBase<T, K, TContext> where T : EntityBase<K> where TContext : DbContext
+    public interface IRepositoryQueryBase<T, K, TContext> 
+        where T : EntityBase<K>
+        where TContext : DbContext
     {
         IQueryable<T> FindAll(bool trackChange = false);
         IQueryable<T> FindAll(bool trackChange = false, params Expression<Func<T, object>>[] includeProperties);
