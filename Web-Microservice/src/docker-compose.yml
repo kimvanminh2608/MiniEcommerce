@@ -52,6 +52,12 @@ services:
       context: .
       dockerfile: Services/Customer.API/Dockerfile
 
+  basket.api:
+    image: ${DOCKER_REGISTRY-}basket-api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Basket.API/Dockerfile
+
 networks:
   default:
     name: web_microservices
