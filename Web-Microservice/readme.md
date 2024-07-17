@@ -22,7 +22,9 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remo
 ```
 
 ## Application URLs - Local Environment (Docker container):
-- Product API: http://locahost:6002
+- Product API: http://localhost:6002/api/products
+- Customer API: http://localhost:6003/api/customers
+- Basket API: http://localhost:6004/api/baskets
 
 ## Docker application urls
 - Portainer: http://localhost:9000 - username: admin ; pass: admin123456789
@@ -36,6 +38,8 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remo
 
 ## Developement environment
 - Product API: http://locahost:5002/api/products
+- Customer API: http://localhost:5003/api/customers
+- Basket API: http://localhost:5004/api/baskets
 ## Production environment
 
 ---
