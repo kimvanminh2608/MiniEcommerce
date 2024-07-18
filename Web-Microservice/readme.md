@@ -62,3 +62,5 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remo
 - ASPNETCORE_ENVIRONMENT=Production dotnet ef database update
 - dotnet watch run --environment "Developement"
 - dotnet restore
+- Migration Command:
+- add-migration "Init_OrderDb" -p Ordering.Infrastructure -s Ordering.API -o Persistence\Migrations
