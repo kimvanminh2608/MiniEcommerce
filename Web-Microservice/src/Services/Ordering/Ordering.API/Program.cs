@@ -3,6 +3,7 @@ using Ordering.Infrastructure;
 using Ordering.Infrastructure.Persistence;
 using Ordering.Application;
 using Serilog;
+using Ordering.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ Log.Information("Start Ordering API");
 
 try
 {
+    builder.Host.AddAppConfiguration();
+    builder.Services.AddConfigurationSettings(builder.Configuration);
     // Add services to the container.
     builder.Services.AddInfrastructureServices(builder.Configuration);
     builder.Services.AddApplicationServices();

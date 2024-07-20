@@ -1,11 +1,14 @@
 ﻿using Contracts.Commons.Interfaces;
+using Contracts.Services;
 using Infrastructure.Commons;
+using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ordering.Application.Commons.Interfaces;
 using Ordering.Infrastructure.Persistence;
 using Ordering.Infrastructure.Repositories;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +30,7 @@ namespace Ordering.Infrastructure
             services.AddScoped<OrderContextSeed>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+            services.AddScoped(typeof(ISMTPEmailService), typeof(SMTPEmailService));
             return services;
         }
     }
