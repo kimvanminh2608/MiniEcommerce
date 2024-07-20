@@ -1,5 +1,7 @@
 using Common.Logging;
 using Ordering.Infrastructure;
+using Ordering.Infrastructure.Persistence;
+using Ordering.Application;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,7 @@ try
 {
     // Add services to the container.
     builder.Services.AddInfrastructureServices(builder.Configuration);
-
+    builder.Services.AddApplicationServices();
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
@@ -24,6 +26,14 @@ try
     {
         app.UseSwagger();
         app.UseSwaggerUI();
+    }
+
+    // Initialize and seed data
+    using (var scope =  app.Services.CreateScope())
+    {
+        var orderContextSeed = scope.ServiceProvider.GetRequiredService<OrderContextSeed>();
+        await orderContextSeed.InitializeAsync();
+        await orderContextSeed.SeedAsync();
     }
 
     app.UseHttpsRedirection();

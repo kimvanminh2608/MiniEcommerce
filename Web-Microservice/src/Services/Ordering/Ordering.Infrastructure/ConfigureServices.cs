@@ -1,7 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Contracts.Commons.Interfaces;
+using Infrastructure.Commons;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ordering.Application.Commons.Interfaces;
 using Ordering.Infrastructure.Persistence;
+using Ordering.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +24,9 @@ namespace Ordering.Infrastructure
                     builder => builder.MigrationsAssembly(typeof(OrderContext).Assembly.FullName));
             });
 
+            services.AddScoped<OrderContextSeed>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
             return services;
         }
     }
