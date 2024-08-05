@@ -29,10 +29,10 @@ namespace Ordering.Infrastructure.Persistence
                     await _context.Database.MigrateAsync();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _logger.Error("an error has occured when initializing database");
-                throw;
+                throw ex;
             }
         }
 

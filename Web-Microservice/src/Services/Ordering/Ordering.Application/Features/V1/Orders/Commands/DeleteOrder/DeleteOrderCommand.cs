@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Ordering.Application.Features.V1.Orders
 {
-    public class DeleteOrderCommand : IRequest<ApiResult<long>>, IMapFrom<Order>
+    public class DeleteOrderCommand : IRequest<ApiResult<long>>
     {
         public long Id { get; set; }
 
