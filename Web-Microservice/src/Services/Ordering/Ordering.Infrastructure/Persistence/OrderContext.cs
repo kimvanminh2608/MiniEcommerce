@@ -1,4 +1,5 @@
 ﻿using Contracts.Domains.Interfaces;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Ordering.Domain.Entities;
 using System;
@@ -12,9 +13,10 @@ namespace Ordering.Infrastructure.Persistence
 {
     public class OrderContext : DbContext
     {
-        public OrderContext(DbContextOptions<OrderContext> options) : base(options)
+        private readonly IMediator _mediator;
+        public OrderContext(DbContextOptions<OrderContext> options, IMediator mediator) : base(options)
         {
-            
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
         public DbSet<Order> Orders { get; set; }
@@ -55,6 +57,8 @@ namespace Ordering.Infrastructure.Persistence
                 }
             }
 
+            var result = base.SaveChangesAsync(cancellationToken);
+            _mediator.Publish(result);
             return base.SaveChangesAsync(cancellationToken);
         }
     }

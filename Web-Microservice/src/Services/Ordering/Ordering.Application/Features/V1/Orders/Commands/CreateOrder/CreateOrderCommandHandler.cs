@@ -33,7 +33,8 @@ namespace Ordering.Application.Features.V1.Orders
         {
             _logger.Information($"BEGIN: {MethodName} - UserName: {request.UserName}");
             var order = _mapper.Map<Order>(request);
-            var result = await _repository.CreateOrderAsync(order);
+            var result = await _repository.CreateOrder(order);
+            result.AddedOrder();
             await _repository.SaveChangesAsync();
             _logger.Information($"CREATE Order UserName: {request.UserName} success");
             SendMailAsync(result, cancellationToken);

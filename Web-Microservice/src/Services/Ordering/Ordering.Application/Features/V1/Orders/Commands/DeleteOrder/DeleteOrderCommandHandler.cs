@@ -24,7 +24,8 @@ namespace Ordering.Application.Features.V1.Orders
         public async Task<ApiResult<long>> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
         {
             var entity = await _repository.GetByIdAsync(request.Id);
-            await _repository.DeleteAsync(entity);
+            _repository.Delete(entity);
+            entity.DeletedOrder();
             await _repository.SaveChangesAsync();
             _logger.Information($"Order {request.Id} deleted");
             return new ApiSuccessResult<long>(204);

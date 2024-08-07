@@ -14,5 +14,8 @@ namespace Ordering.Application.Commons.Interfaces
 
         Task<Order> CreateOrderAsync(Order order);
         Task<Order> UpdateOrderAsync(Order order);
+
+        Task<Order> CreateOrder(Order order);
+        Task<Order> UpdateOrder(Order order);
     }
 }

@@ -19,6 +19,12 @@ namespace Ordering.Infrastructure.Repositories
             
         }
 
+        public async Task<Order> CreateOrder(Order order)
+        {
+            Create(order);
+            return order;
+        }
+
         public async Task<Order> CreateOrderAsync(Order order)
         {
             await CreateAsync(order);
@@ -29,6 +35,12 @@ namespace Ordering.Infrastructure.Repositories
         {
             var result = await FindCondition(x => x.UserName.Equals(userName)).ToListAsync();
             return result;
+        }
+
+        public async Task<Order> UpdateOrder(Order order)
+        {
+            Update(order);
+            return order;
         }
 
         public async Task<Order> UpdateOrderAsync(Order order)

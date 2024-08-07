@@ -34,7 +34,7 @@ namespace Ordering.Application.Features.V1.Orders
             }
             _logger.Information($"BEGIN {MethodName} - order: {request.Id}");
             var entity = _mapper.Map(request, exist);
-            var updateOrder = await _repository.UpdateOrderAsync(entity);
+            var updateOrder = await _repository.UpdateOrder(entity);
             await _repository.SaveChangesAsync();
             _logger.Information($"Update order done");
             var result = _mapper.Map<OrderDto>(entity);
