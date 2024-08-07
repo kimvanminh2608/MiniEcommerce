@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mysqlx.Prepare;
+using Serilog;
+using ILogger = Serilog.ILogger;
 
 namespace Product.API.Extensions
 {
@@ -16,17 +18,17 @@ namespace Product.API.Extensions
 
                 try
                 {
-                    logger.LogInformation("Migrating mysql database");
+                    logger.Information("Migrating mysql database");
 
                     ExecuteMigrations(context);
 
-                    logger.LogInformation("Migrated mysql database");
+                    logger.Information("Migrated mysql database");
 
                     InvokeSeeder(seeder, context, services);
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "An error occured when migrate mysql database");
+                    logger.Information(ex, "An error occured when migrate mysql database");
                 }
             }
 

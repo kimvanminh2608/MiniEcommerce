@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "http": {
+    "Ordering.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

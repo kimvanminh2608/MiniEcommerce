@@ -39,8 +39,7 @@ services:
   
   # productdb mysql
   productdb:
-    container_name: mysqldb
-    image: mysql:8.0.29
+    container_name: productdb
     environment: 
         MYSQL_ROOT_PASSWORD: "KvM1996$"
     restart: always
@@ -51,8 +50,7 @@ services:
   
   # customerdb postgresDb
   customerdb:
-    container_name: postgresdb
-    image: postgres:alpine3.16
+    container_name: customerdb
     environment:
     - POSTGRES_USER=admin
     - POSTGRES_PASSWORD=admin1234
@@ -65,7 +63,7 @@ services:
   # basket redis
   basketdb:
     container_name: basketdb
-    image: redis:alpine
+    
     restart: always
     ports:
     - "6379:6379"
@@ -73,7 +71,7 @@ services:
   # inventoryDb mongoDb
   inventorydb:
     container_name: inventorydb
-    image: mongo
+    
     restart: always
     ports:
     - "27017:27017"
@@ -85,7 +83,7 @@ services:
   # Infrastructure section
   rabbitmq:
     container_name: rabbitmq
-    image: rabbitmq:3-management-alpine
+    
     restart: always
     ports:
     - "5672:5672"
@@ -93,7 +91,7 @@ services:
   
   pgadmin:
     container_name: pgadmin
-    image: dpage/pgadmin4
+    
     environment:
     - PGADMIN_DEFAULT_EMAIL:admin1234@microservice.com
     - PGADMIN_DEFAULT_PASSWORD:admin1234
@@ -105,7 +103,7 @@ services:
 
   portainer:
     container_name: portainer
-    image: portainer/portainer-ce
+    
     restart: always
     ports:
     - "8080:8000"
@@ -116,7 +114,7 @@ services:
 
   elasticsearch:
     container_name: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.2
+    
     environment:
     - xpack.monitoring.enabled=true
     - xpack.watcher.enabled=false
@@ -129,7 +127,7 @@ services:
 
   kibana:
     container_name: kibana
-    image: docker.elastic.co/kibana/kibana:7.17.2
+    
     environment:
     - ELASTICSEARCH_URL=http://elasticsearch:9200
     depends_on:

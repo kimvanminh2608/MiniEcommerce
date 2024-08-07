@@ -6,7 +6,7 @@
         {
             if (!productContext.Products.Any())
             {
-                productContext.AddRange(GetProducts);
+                productContext.AddRange(GetProducts());
                 await productContext.SaveChangesAsync();
                 logger.Information("Seeded data for ProductDb associated with context {DbContextName}", nameof(ProductContext));
             }

@@ -51,9 +51,6 @@ namespace Product.API.Persistence
             return base.SaveChangesAsync(cancellationToken);
         }
 
-        internal void AddRange(object getProducts)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
