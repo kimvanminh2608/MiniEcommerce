@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Infrastructure.Commons.Models;
+using Infrastructure.Extensions;
 using Inventory.Product.API.Entities;
 using Inventory.Product.API.Extensions;
 using Inventory.Product.API.Repositories.Abstraction;
@@ -32,12 +34,13 @@ namespace Inventory.Product.API.Services
                 filterSearchTern = Builders<InventoryEntry>.Filter.Eq(x => x.DocumentNo, query.SearchTerm);
             }
             var andFilter = filterItemNo & filterSearchTern;
-            var pagedList = await Collection.Find(andFilter)
-                .Skip((query.PageNumber - 1) * query.PageSize)
-                .Limit(query.PageSize)
-                .ToListAsync();
+            var pagedList = await Collection.PaginatedListAsync(andFilter,
+                pageIndex: query.PageNumber,
+                pageSize: query.PageSize);
 
-            var result = _mapper.Map<IEnumerable<InventoryEntryDto>>(pagedList);
+            var items = _mapper.Map<IEnumerable<InventoryEntryDto>>(pagedList);
+
+            var result = new PagedList<InventoryEntryDto>(items, pagedList.GetMetaData().TotalItems, query.PageNumber, query.PageSize);
             return result;
         }
 
