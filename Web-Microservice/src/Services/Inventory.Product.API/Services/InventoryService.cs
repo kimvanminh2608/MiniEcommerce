@@ -25,7 +25,7 @@ namespace Inventory.Product.API.Services
             return result;
         }
 
-        public async Task<IEnumerable<InventoryEntryDto>> GetAllByItemNoPagingAsync(GetInventoryPagingQuery query)
+        public async Task<PagedList<InventoryEntryDto>> GetAllByItemNoPagingAsync(GetInventoryPagingQuery query)
         {
             var filterSearchTern = Builders<InventoryEntry>.Filter.Empty;
             var filterItemNo = Builders<InventoryEntry>.Filter.Eq(x => x.ItenNo, query.ItemNo());
