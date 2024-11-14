@@ -20,7 +20,7 @@ namespace Shared.SeedWork
                 TotalItems = totalItems,
                 PageSize = pageSize,
                 CurrentPage = pageNumber,
-                TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize)
+                //TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize)
             };
 
             AddRange(items);

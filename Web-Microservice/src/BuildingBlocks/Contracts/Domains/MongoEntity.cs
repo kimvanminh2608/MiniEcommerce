@@ -1,9 +1,14 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Inventory.Product.API.Entities.Abstraction
+namespace Contracts.Domains
 {
-    public abstract class MongoEntity
+    public class MongoEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
