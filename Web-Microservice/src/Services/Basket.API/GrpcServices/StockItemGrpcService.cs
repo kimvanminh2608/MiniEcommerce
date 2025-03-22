@@ -1,0 +1,28 @@
+﻿using Basket.API.Protos;
+using System;
+
+namespace Basket.API.GrpcServices
+{
+    public class StockItemGrpcService
+    {
+        private readonly StockProtoService.StockProtoServiceClient _stockProtoServiceClient;
+        public StockItemGrpcService(StockProtoService.StockProtoServiceClient stockProtoServiceClient)
+        {
+            _stockProtoServiceClient = stockProtoServiceClient ?? throw new ArgumentException(nameof(stockProtoServiceClient));
+        }
+
+        public async Task<StockModel> GetStock(string itemNo)
+        {
+            try
+            {
+                var stockItemRequest = new GetStockRequest { ItemNo = itemNo };
+                return await _stockProtoServiceClient.GetStockAsync(stockItemRequest);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+    }
+}

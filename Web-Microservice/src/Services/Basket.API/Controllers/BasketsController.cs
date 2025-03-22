@@ -1,7 +1,9 @@
 ﻿using Basket.API.Entities;
+using Basket.API.GrpcServices;
 using Basket.API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 
@@ -12,9 +14,11 @@ namespace Basket.API.Controllers
     public class BasketsController : ControllerBase
     {
         private readonly IBasketRepository _basketRepository;
-        public BasketsController(IBasketRepository basketRepository)
+        private readonly StockItemGrpcService _stockItemGrpcService;
+        public BasketsController(IBasketRepository basketRepository, StockItemGrpcService stockItemGrpcService)
         {
-            _basketRepository = basketRepository;
+            _basketRepository = basketRepository ?? throw new ArgumentException(nameof(basketRepository));
+            _stockItemGrpcService = stockItemGrpcService ?? throw new ArgumentException(nameof(stockItemGrpcService));
         }
 
         [HttpGet("username", Name = "GetBasket")]
@@ -29,6 +33,12 @@ namespace Basket.API.Controllers
         [ProducesResponseType(typeof(Cart), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Cart>> UpdateBasket([FromBody] Cart cart)
         {
+            // comunicate with Inventory .Grpc to get stock quantity
+            foreach (var item in cart.Items)
+            {
+                var stock = await _stockItemGrpcService.GetStock(item.ProductNo);
+                item.SetAvailableQuantity(stock.Quantity);
+            }
             var option = new DistributedCacheEntryOptions()
                 .SetAbsoluteExpiration(DateTime.UtcNow.AddHours(1))
                 .SetSlidingExpiration(TimeSpan.FromMinutes(30));

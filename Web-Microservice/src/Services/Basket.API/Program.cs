@@ -11,6 +11,7 @@ try
 
     builder.Services.ConfigureServices();
     builder.Services.ConfigureRedis(builder.Configuration);
+    builder.Services.ConfigureGrpcServices();
     builder.Services.AddConfigurationSettings(builder.Configuration);
     var app = builder.Build();
 

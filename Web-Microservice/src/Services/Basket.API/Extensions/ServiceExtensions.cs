@@ -1,4 +1,6 @@
-﻿using Basket.API.Repositories;
+﻿using Basket.API.GrpcServices;
+using Basket.API.Protos;
+using Basket.API.Repositories;
 using Basket.API.Repositories.Interfaces;
 using Contracts.Commons.Interfaces;
 using EventBus.Messages.IntergrationEvent.Interfaces;
@@ -9,6 +11,7 @@ using MassTransit;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shared.Configurations;
 using System.Net.Security;
+using System.Net.WebSockets;
 
 namespace Basket.API.Extensions
 {
@@ -37,6 +40,7 @@ namespace Basket.API.Extensions
             {
                 services.AddScoped<IBasketRepository, BasketRepository>();
                 services.AddTransient<ISerializeService, SerializeService>();
+                
                 services.AddAutoMapper(cfg => cfg.AddProfile(new MappingProfile()));
                 return services;
             }
@@ -128,6 +132,23 @@ namespace Basket.API.Extensions
                                 .Get<CacheSettings>();
 
             services.AddSingleton(cacheSetting);
+
+            var grpcSetting = configuration.GetSection(nameof(GrpcSetting))
+                                .Get<GrpcSetting>();
+
+            services.AddSingleton(grpcSetting);
+            return services;
+        }
+
+        public static IServiceCollection ConfigureGrpcServices(this IServiceCollection services)
+        {
+            var grpcSetting = services.GetOptions<GrpcSetting>("GrpcSetting");
+            services.AddGrpcClient<StockProtoService.StockProtoServiceClient>(o =>
+            {
+                o.Address = new Uri(grpcSetting.StockUrl);
+            });
+
+            services.AddScoped<StockItemGrpcService>();
             return services;
         }
     }
