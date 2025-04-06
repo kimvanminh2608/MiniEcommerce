@@ -1,0 +1,177 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5000"
+    
+    },
+  "Routes": [
+    {
+      "UpStreamPathTemplate": "/customers/{username}",
+      "UpStreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/customers/{username}",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/products/{id}",
+      "UpStreamHttpMethod": [ "Get", "POST", "DELETE" ],
+      "DownstreamPathTemplate": "/api/products/{id}",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/products",
+      "UpStreamHttpMethod": [ "Get", "POST" ],
+      "DownstreamPathTemplate": "/api/products",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/products/get-product-by-no/{itemNo}",
+      "UpStreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/products/get-product-by-no/{itemNo}",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/baskets/{username}",
+      "UpStreamHttpMethod": [ "Get", "DELETE" ],
+      "DownstreamPathTemplate": "/api/baskets/{username}",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/baskets",
+      "UpStreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/baskets",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/baskets/checkout",
+      "UpStreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/baskets/checkout",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/{version}/orders/{any}",
+      "UpStreamHttpMethod": [ "Get", "PUT", "DELETE" ],
+      "DownstreamPathTemplate": "/api/{version}/orders/{any}",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/{version}/orders",
+      "UpStreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/{version}/orders",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/{version}/orders/checkout",
+      "UpStreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/{version}/orders/checkout",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/inventory/items/{any}",
+      "UpStreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/inventory/items/{any}",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/inventory/items/{any}/paging",
+      "UpStreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/inventory/items/{any}/paging",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/inventory/{any}",
+      "UpStreamHttpMethod": [ "GET", "DELETE" ],
+      "DownstreamPathTemplate": "/api/inventory/{any}",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ]
+    },
+    {
+      "UpStreamPathTemplate": "/inventory/purchase/{any}",
+      "UpStreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/inventory/purchase/{any}",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ]
+    }
+  ]
+  }
+}
