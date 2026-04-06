@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Provider.Polly;
+using Ocelot.Cache.CacheManager;
 using Shared.Configurations;
 using System.Text;
+using Ocelot.Cache;
 
 namespace OcelotApiGw.Extensions
 {
@@ -36,7 +38,13 @@ namespace OcelotApiGw.Extensions
 
         public static void ConfigureOcelot(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddOcelot(configuration).AddPolly();
+            services.AddOcelot(configuration)
+                .AddPolly()
+                .AddCacheManager(x =>
+                {
+                    x.WithDictionaryHandle();
+                });
+            //services.AddSingleton<IOcelotCache<CachedResponse>>();
             services.AddTransient<ITokenService, TokenService>();
             services.AddJwtAuthentication();
         }

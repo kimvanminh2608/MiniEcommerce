@@ -68,7 +68,10 @@
       "QoSOptions": {
         "ExceptionsAllowedBeforeBreaking": 2, //sau 2s ko respose => throw timeout exception
         "DurationOfBreak": 1000,
-        "TimeoutValue":  5000 // khi throw lần 2, service ko thể access 5s
+        "TimeoutValue": 5000 // khi throw lần 2, service ko thể access 5s
+      },
+      "FileCachingOptions": {
+        "TtlSeconds":  15, // thời gian lưu cache
       }
     },
     {
