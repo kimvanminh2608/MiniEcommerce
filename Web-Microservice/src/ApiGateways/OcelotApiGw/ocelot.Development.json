@@ -18,7 +18,7 @@
     },
     {
       "UpStreamPathTemplate": "/products/{id}",
-      "UpStreamHttpMethod": [ "Get", "POST", "DELETE" ],
+      "UpStreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/products/{id}",
       "Scheme": [ "http" ],
       "DownstreamHostAndPorts": [
@@ -27,6 +27,25 @@
           "Port": 5002
         }
       ]
+    },
+    {
+      "UpStreamPathTemplate": "/products/{id}",
+      "UpStreamHttpMethod": [  "POST", "DELETE" ],
+      "DownstreamPathTemplate": "/api/products/{id}",
+      "Scheme": [ "http" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer", //setting in JwtBearerDefaults.AuthenticationScheme
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
     },
     {
       "UpStreamPathTemplate": "/products",
