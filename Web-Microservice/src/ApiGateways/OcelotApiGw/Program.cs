@@ -33,9 +33,15 @@ try
     app.UseMiddleware<ErrorWrappingMiddleware>();
 
     //app.UseHttpsRedirection();
-
+    app.UseAuthentication();
     app.UseAuthorization();
-
+    app.UseEndpoints(e =>
+    {
+        e.MapGet("/", async context =>
+        {
+            await context.Response.WriteAsync($"Tedu class");
+        });
+    });
     app.MapControllers();
 
     await app.UseOcelot();
