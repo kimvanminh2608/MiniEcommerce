@@ -57,7 +57,14 @@
           "Host": "localhost",
           "Port": 5002
         }
-      ]
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [], //list bypass ratelimit
+        "EnableRateLimiting": true,
+        "Period": "2s",
+        "PeriodTimespan": 1, // thời gian retry
+        "Limit": 1 // tổng số request cùng lúc truy cập
+      }
     },
     {
       "UpStreamPathTemplate": "/products/get-product-by-no/{itemNo}",
