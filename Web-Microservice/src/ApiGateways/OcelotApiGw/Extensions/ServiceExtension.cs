@@ -47,6 +47,10 @@ namespace OcelotApiGw.Extensions
             //services.AddSingleton<IOcelotCache<CachedResponse>>();
             services.AddTransient<ITokenService, TokenService>();
             services.AddJwtAuthentication();
+            services.AddSwaggerForOcelot(configuration, x =>
+            {
+                x.GenerateDocsForGatewayItSelf = false;
+            });
         }
 
         public static void ConfigureCors(this IServiceCollection services, IConfiguration configuration)

@@ -35,15 +35,27 @@ try
     //app.UseHttpsRedirection();
     app.UseAuthentication();
     app.UseAuthorization();
+    //app.UseEndpoints(e =>
+    //{
+    //    e.MapGet("/", async context =>
+    //    {
+    //        await context.Response.WriteAsync($"Tedu class");
+    //    });
+    //});
     app.UseEndpoints(e =>
     {
-        e.MapGet("/", async context =>
+        e.MapGet("/", context =>
         {
-            await context.Response.WriteAsync($"Tedu class");
+            context.Response.Redirect("swagger/index.html");
+            return Task.CompletedTask;
         });
     });
     app.MapControllers();
 
+    app.UseSwaggerForOcelotUI(o =>
+    {
+        o.PathToSwaggerGenerator = "swagger/docs";
+    });
     await app.UseOcelot();
 
     app.Run();

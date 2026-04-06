@@ -14,7 +14,8 @@
           "Host": "localhost",
           "Port": 5003
         }
-      ]
+      ],
+      "SwaggerKey": "customer-service"
     },
     {
       "UpStreamPathTemplate": "/products/{id}",
@@ -71,7 +72,7 @@
         "TimeoutValue": 5000 // khi throw lần 2, service ko thể access 5s
       },
       "FileCachingOptions": {
-        "TtlSeconds":  15, // thời gian lưu cache
+        "TtlSeconds":  15 // thời gian lưu cache
       }
     },
     {
@@ -206,6 +207,12 @@
         }
       ]
     }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "customer-service",
+      "Version": "v1",
+      "Url": "http://localhost:5003/swagger/v1/swagger.json"
+    }
   ]
-  }
 }
