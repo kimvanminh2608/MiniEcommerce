@@ -64,6 +64,11 @@
         "Period": "2s",
         "PeriodTimespan": 1, // thời gian retry
         "Limit": 1 // tổng số request cùng lúc truy cập
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2, //sau 2s ko respose => throw timeout exception
+        "DurationOfBreak": 1000,
+        "TimeoutValue":  5000 // khi throw lần 2, service ko thể access 5s
       }
     },
     {
